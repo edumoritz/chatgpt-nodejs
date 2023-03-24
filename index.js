@@ -16,4 +16,15 @@ async function runCompletion () {
     console.log(completion.data.choices[0].text);
 }
 
-runCompletion();
+async function showMessageError (question) {
+    console.log(question);
+    const completion = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: question,
+        max_tokens: 500
+    });
+    console.log(completion.data.choices[0].text);
+}
+
+showMessageError("mostre uma mensagem de erro quando http for 404");
+// runCompletion();
