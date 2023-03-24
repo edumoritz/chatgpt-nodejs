@@ -1,4 +1,6 @@
 const { Configuration, OpenAIApi } = require("openai");
+const fs = require('fs');
+
 require('dotenv').config()
 
 const configuration = new Configuration({
@@ -13,12 +15,17 @@ async function runCompletion (question, maxToken = 500) {
         prompt: question,
         max_tokens: maxToken
     });
-    console.log(completion.data.choices[0].text);
+
+    const result = completion.data.choices[0].text
+    console.log(result);
+
+    const fileName = 'output.js';
+    fs.writeFileSync(fileName, `${result}`);
 }
 
 function sumValue(a, b) {
     return a + b;
 }
 
-const question = "show me a example of test with jest in nodejs for the following function: \n" + sumValue.toString();
+const question = "show me a example of test with jest in nodejs for the following function, just show me the example: \n" + sumValue.toString();
 runCompletion(question, 1000); 
