@@ -6,12 +6,12 @@ apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
-async function runCompletion () {
-    const question = "How are you today ?"
+async function runCompletion (question, maxToken = 500) {
     console.log(question);
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: question,
+        max_tokens: maxToken
     });
     console.log(completion.data.choices[0].text);
 }
@@ -26,5 +26,8 @@ async function showMessageError (question) {
     console.log(completion.data.choices[0].text);
 }
 
-showMessageError("mostre uma mensagem de erro quando http for 404");
-// runCompletion();
+// showMessageError("display an error message when HTTP is 404.");
+// runCompletion("How are you today ?");
+
+const question = "show me a example of test with jest in nodejs for the following function: \n" + showMessageError.toString();
+runCompletion(question, 1000); 
