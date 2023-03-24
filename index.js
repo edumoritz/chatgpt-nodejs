@@ -16,18 +16,9 @@ async function runCompletion (question, maxToken = 500) {
     console.log(completion.data.choices[0].text);
 }
 
-async function showMessageError (question) {
-    console.log(question);
-    const completion = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: question,
-        max_tokens: 500
-    });
-    console.log(completion.data.choices[0].text);
+function sumValue(a, b) {
+    return a + b;
 }
 
-// showMessageError("display an error message when HTTP is 404.");
-// runCompletion("How are you today ?");
-
-const question = "show me a example of test with jest in nodejs for the following function: \n" + showMessageError.toString();
+const question = "show me a example of test with jest in nodejs for the following function: \n" + sumValue.toString();
 runCompletion(question, 1000); 
